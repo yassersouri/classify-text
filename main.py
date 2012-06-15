@@ -69,7 +69,7 @@ def test_main():
 	X_tfidf = tf_transformer.transform(word_counts)
 
 
-	X = word_counts
+	X = X_tfidf
 
 	#cross validation
 	clf = sklearn.naive_bayes.MultinomialNB()
