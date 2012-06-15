@@ -2,7 +2,8 @@ from colorama import init
 from termcolor import colored
 import sklearn.datasets
 import sklearn.feature_extraction.text
-from sklearn.naive_bayes import MultinomialNB
+import sklearn.naive_bayes
+import sklearn.cross_validation
 def main():
 	init()
 
@@ -26,13 +27,15 @@ def main():
 	# 		num.append(files.filenames[i])
 	# print num;exit()
 
+	# calculate BOW
 	X_counts = count_vector.fit_transform(files.data)
 	
+	# calculate TFIDF
 	tf_transformer = sklearn.feature_extraction.text.TfidfTransformer(use_idf=True).fit(X_counts)
 	X_tf = tf_transformer.transform(X_counts)
 	
-
-	clf = MultinomialNB().fit(X_tf, files.target)
+	# fit classifier
+	clf = sklearn.naive_bayes.MultinomialNB().fit(X_tf, files.target)
 
 	docs_new = ['I want to sell this low price stuff', 'Playing with new skates and stick']
 	X_new_counts = count_vector.transform(docs_new)
@@ -50,6 +53,7 @@ def main():
 
 def test_main():
 	directory = 'ds2'
+	directory = 'dataset'
 	# load the dataset from disk
 	files = sklearn.datasets.load_files(directory)
 
@@ -60,7 +64,32 @@ def test_main():
 	word_counts = bagOfWords(files.data)
 
 	#cross validation
-	
+	clf = sklearn.naive_bayes.MultinomialNB()
+	scores = cross_validation(word_counts, files.target, clf)
+	pretty_print_scores(scores)
+
+def pretty_print_scores(scores):
+	"""
+	Prints mean and std of a list of scores, pretty and colorful!
+	parameter `scores` is a list of numbers.
+	"""
+	print colored ("                                      ", 'white', 'on_white')
+	print colored (" Mean accuracy: %0.3f (+/- %0.3f std) " % (scores.mean(), scores.std() / 2), 'magenta', 'on_white', attrs=['bold'])
+	print colored ("                                      ", 'white', 'on_white')
+
+def cross_validation(data, target, classifier, cv=5):
+	"""
+	Does a cross validation with the classifier
+	parameters:
+		- `data`: array-like, shape=[n_samples, n_features]
+			Training vectors
+		- `target`: array-like, shape=[n_samples]
+			Target values for corresponding training vectors
+		- `classifier`: A classifier from the scikit-learn family would work!
+		- `cv`: number of times to do the cross validation. (default=5)
+	return a list of numbers, where the length of the list is equal to `cv` argument.
+	"""
+	return sklearn.cross_validation.cross_val_score(classifier, data, target, cv=cv)
 
 def bagOfWords(files_data):
 	"""
@@ -70,7 +99,7 @@ def bagOfWords(files_data):
 	"""
 
 	count_vector = sklearn.feature_extraction.text.CountVectorizer()
-	return count_vector.fit_transform(files.data)
+	return count_vector.fit_transform(files_data)
 
 def refine_all_emails(file_data):
 	"""
