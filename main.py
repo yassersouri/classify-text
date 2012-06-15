@@ -4,6 +4,7 @@ import sklearn.datasets
 import sklearn.feature_extraction.text
 import sklearn.naive_bayes
 import sklearn.cross_validation
+import sklearn.svm
 def main():
 	init()
 
@@ -63,9 +64,17 @@ def test_main():
 	# calculate the BOW representation
 	word_counts = bagOfWords(files.data)
 
+	# TFIDF
+	tf_transformer = sklearn.feature_extraction.text.TfidfTransformer(use_idf=True).fit(word_counts)
+	X_tfidf = tf_transformer.transform(word_counts)
+
+
+	X = word_counts
+
 	#cross validation
 	clf = sklearn.naive_bayes.MultinomialNB()
-	scores = cross_validation(word_counts, files.target, clf)
+	clf = sklearn.svm.LinearSVC()
+	scores = cross_validation(X, files.target, clf)
 	pretty_print_scores(scores)
 
 def pretty_print_scores(scores):
