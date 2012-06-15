@@ -51,7 +51,19 @@ def main():
 def test_main():
 	directory = 'ds2'
 	files = sklearn.datasets.load_files(directory)
-	print refine_single_email(files.data[0])
+	files.data = refine_all_emails(files.data)
+	print files.data[0]
+
+"""
+Does `refine_single_email` for every single email included in the list
+parameter is a list of strings
+returns a list of strings
+"""
+def refine_all_emails(file_data):
+	newfiles = []
+	for email in file_data:
+		newfiles.append(refine_single_email(email))
+	return newfiles
 
 """
 Delete the unnecessary information in the header of emails
