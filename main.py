@@ -51,19 +51,17 @@ def main():
 def test_main():
 	directory = 'ds2'
 	files = sklearn.datasets.load_files(directory)
-	files.data = refine_all_emails(files.data)
+	refine_all_emails(files.data)
 	print files.data[0]
 
 """
 Does `refine_single_email` for every single email included in the list
 parameter is a list of strings
-returns a list of strings
+returns NOTHING!
 """
 def refine_all_emails(file_data):
-	newfiles = []
-	for email in file_data:
-		newfiles.append(refine_single_email(email))
-	return newfiles
+	for i, email in zip(range(len(file_data)),file_data):
+		file_data[i] = refine_single_email(email)
 
 """
 Delete the unnecessary information in the header of emails
