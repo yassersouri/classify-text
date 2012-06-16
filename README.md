@@ -10,7 +10,7 @@ For dataset I used the famous "Twenty Newsgrousps" dataset. You can find the dat
 
 I've included a subset of the dataset in the repo, located at `dataset\` directory. This subset includes 6 of the 20 newsgroups: `space`, `electronics`, `crypt`, `hockey`, `motorcycles` and `forsale`.
 
-We you run `main.py` it asks you for the root of the dataset. You can supply your own dataset assuming it has a similar directry structure.
+When you run `main.py` it asks you for the root of the dataset. You can supply your own dataset assuming it has a similar directry structure.
 
 #### UTF-8 incompatibility
 
