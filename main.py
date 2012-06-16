@@ -93,32 +93,34 @@ def main_test(path = None):
 
 	# TFIDF
 	print colored('Calculating TFIDF', 'green', attrs=['bold'])
-	tf_transformer = sklearn.feature_extraction.text.TfidfTransformer(use_idf=False).fit(word_counts)
+	tf_transformer = sklearn.feature_extraction.text.TfidfTransformer(use_idf=True).fit(word_counts)
 	X = tf_transformer.transform(word_counts)
+
 
 	print '\n\n'
 
 	# create classifier
+	# clf = sklearn.naive_bayes.MultinomialNB()
 	clf = sklearn.svm.LinearSVC()
 
 	# test the classifier
 	print '\n\n'
-	print colored('Testing classifier with train-test split', 'blue', attrs=['bold'])
+	print colored('Testing classifier with train-test split', 'magenta', attrs=['bold'])
 	test_classifier(X, files.target, clf, test_size=0.2, y_names=files.target_names, confusion=False)
 
 def test_classifier(X, y, clf, test_size=0.4, y_names=None, confusion=False):
 	#train-test split
-	print ('test size is:', test_size)
+	print 'test size is: %2.0f%%' % (test_size*100)
 	X_train, X_test, y_train, y_test = sklearn.cross_validation.train_test_split(X, y, test_size=test_size)
 
 	clf.fit(X_train, y_train)
 	y_predicted = clf.predict(X_test)
 
 	if not confusion:
-		print colored('Classification report:', 'blue', attrs=['bold'])
+		print colored('Classification report:', 'magenta', attrs=['bold'])
 		print sklearn.metrics.classification_report(y_test, y_predicted, target_names=y_names)
 	else:
-		print colored('Confusion Matrix:', 'blue', attrs=['bold'])
+		print colored('Confusion Matrix:', 'magenta', attrs=['bold'])
 		print sklearn.metrics.confusion_matrix(y_test, y_predicted)
 
 if __name__ == '__main__':

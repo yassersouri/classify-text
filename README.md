@@ -39,3 +39,121 @@ The code is pretty straight forward and well documented.
 
 ### Experiments
 
+For experiments I used the subset of the dataset (as described above). I assume that we like `hockey`, `crypt` and `electronics` newsgroups, and we dislike the others.
+
+For each experiment we use a "feature vector", a "classifier" and a train-test spliting strategy.
+
+#### Experiment 1: BOW - NB - 20% test
+
+In this experiment we use a Bag Of Words (**BOW**) representation of each documet. And also a Naive Bayes (**NB**) classifier.
+
+We split the data, so that **20%** of them remain for testing.
+
+__Results__:
+
+```
+             precision    recall  f1-score   support
+
+   dislikes       0.95      0.99      0.97       575
+      likes       0.99      0.95      0.97       621
+
+avg / total       0.97      0.97      0.97      1196
+
+```
+
+#### Experiment 2: TF - NB - 20% test
+
+In this experiment we use a Term Frequency (**TF**) representation of each documet. And also a Naive Bayes (**NB**) classifier.
+
+We split the data, so that **20%** of them remain for testing.
+
+__Results__:
+
+```
+             precision    recall  f1-score   support
+
+   dislikes       0.97      0.92      0.94       633
+      likes       0.91      0.97      0.94       563
+
+avg / total       0.94      0.94      0.94      1196
+
+```
+
+#### Experiment 3: TFIDF - NB - 20% test
+
+In this experiment we use a **TFIDF** representation of each documet. And also a Naive Bayes (**NB**) classifier.
+
+We split the data, so that **20%** of them remain for testing.
+
+__Results__:
+
+```
+             precision    recall  f1-score   support
+
+   dislikes       0.96      0.95      0.95       584
+      likes       0.95      0.96      0.96       612
+
+avg / total       0.95      0.95      0.95      1196
+
+```
+
+#### Experiment 4: TFIDF - SVM - 20% test
+
+In this experiment we use a **TFIDF** representation of each documet. And also a linear Support Vector Machine (**SVM**) classifier.
+
+We split the data, so that **20%** of them remain for testing.
+
+__Results__:
+
+```
+             precision    recall  f1-score   support
+
+   dislikes       0.96      0.97      0.97       587
+      likes       0.97      0.96      0.97       609
+
+avg / total       0.97      0.97      0.97      1196
+
+```
+
+#### Experiment 5: TFIDF - SVM - KFOLD
+
+In this experiment we use a **TFIDF** representation of each documet. And also a linear Support Vector Machine (**SVM**) classifier.
+
+We split the data using Stratified **K-Fold** algorithm with **k = 5**.
+
+__Results__:
+
+```
+Mean accuracy: 0.977 (+/- 0.002 std)
+
+```
+
+#### Experiment 5: BOW - NB - KFOLD
+
+In this experiment we use a **TFIDF** representation of each documet. And also a linear Support Vector Machine (**SVM**) classifier.
+
+We split the data using Stratified **K-Fold** algorithm with **k = 5**.
+
+__Results__:
+
+```
+Mean accuracy: 0.968 (+/- 0.002 std)
+```
+
+#### Experiment 6: TFIDF - SVM - 90% test
+
+In this experiment we use a **TFIDF** representation of each documet. And also a linear Support Vector Machine (**SVM**) classifier.
+
+We split the data, so that **90%** of them remain for testing! Only 10% of the dataset is used for training!
+
+__Results__:
+
+```
+             precision    recall  f1-score   support
+
+   dislikes       0.90      0.95      0.93      2689
+      likes       0.95      0.90      0.92      2693
+
+avg / total       0.92      0.92      0.92      5382
+
+```
