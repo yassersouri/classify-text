@@ -157,3 +157,23 @@ __Results__:
 avg / total       0.92      0.92      0.92      5382
 
 ```
+
+#### Experiment 7: TFIDF - SVM - KFOLD - 20 classes
+
+In this experiment we use a **TFIDF** representation of each documet. And also a linear Support Vector Machine (**SVM**) classifier.
+
+We split the data using Stratified **K-Fold** algorithm with **k = 5**.
+
+We also use the whole "Twenty Newsgroups" dataset, which has **20** classes.
+
+__Results__:
+
+```
+Mean accuracy: 0.892 (+/- 0.001 std)
+
+```
+
+
+### So What?
+
+This experiments show that text classification can be effectively done by simple tools like TFIDF and SVM.
