@@ -9,24 +9,20 @@ def main():
 	init()
 
 
-	test_main()
+	# test_main()
 
-	exit();
+	# exit();
 	# Load All the files
-	files = sklearn.datasets.load_files('dataset', shuffle=True)
+	files = sklearn.datasets.load_files('ds3', shuffle=True)
 	
 	# BagofWords
 	count_vector = sklearn.feature_extraction.text.CountVectorizer()
 	
 	
-	# num = []
-	# for i in range(len(files.filenames)):
-	# 	try:
-	# 		X_counts = count_vector.fit_transform(files.data[i:i+1])
-	# 	except Exception, e:
-	# 		# print i, files.filenames[i]; exit()
-	# 		num.append(files.filenames[i])
-	# print num;exit()
+	# find incompatible files
+	incom_files = find_incompatible_files('ds3')
+	print incom_files
+	exit()
 
 	# calculate BOW
 	X_counts = count_vector.fit_transform(files.data)
@@ -47,10 +43,6 @@ def main():
 	for doc, cat in zip(docs_new, predicted):
 		print '%r => %s' % (doc, files.target_names[cat])
 
-
-	# add cross validation for testing
-	# add naive bayes classifier and BOW
-	# add better classifier with TFIDF
 
 def test_main():
 	directory = 'ds2'
@@ -74,8 +66,27 @@ def test_main():
 	#cross validation
 	clf = sklearn.naive_bayes.MultinomialNB()
 	clf = sklearn.svm.LinearSVC()
-	scores = cross_validation(X, files.target, clf)
+	scores = cross_validation(X, files.target, clf, cv=10)
 	pretty_print_scores(scores)
+
+
+def find_incompatible_files(path):
+	"""
+	Finds the filenames that are incompatible with `CountVectorizer`. These files are usually not compatible with UTF8!
+	parameter `path` is the absolute or relative path of the training data's root directory.
+	returns a list of strings.
+	"""
+
+	count_vector = sklearn.feature_extraction.text.CountVectorizer()
+	files = sklearn.datasets.load_files(path)
+	num = []
+	for i in range(len(files.filenames)):
+		try:
+			X_counts = count_vector.fit_transform(files.data[i:i+1])
+		except Exception, e:
+			num.append(files.filenames[i])
+
+	return num
 
 def pretty_print_scores(scores):
 	"""
