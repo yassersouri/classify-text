@@ -45,7 +45,7 @@ For each experiment we use a "feature vector", a "classifier" and a train-test s
 
 #### Experiment 1: BOW - NB - 20% test
 
-In this experiment we use a Bag Of Words (**BOW**) representation of each documet. And also a Naive Bayes (**NB**) classifier.
+In this experiment we use a Bag Of Words (**BOW**) representation of each document. And also a Naive Bayes (**NB**) classifier.
 
 We split the data, so that **20%** of them remain for testing.
 
@@ -63,7 +63,7 @@ avg / total       0.97      0.97      0.97      1196
 
 #### Experiment 2: TF - NB - 20% test
 
-In this experiment we use a Term Frequency (**TF**) representation of each documet. And also a Naive Bayes (**NB**) classifier.
+In this experiment we use a Term Frequency (**TF**) representation of each document. And also a Naive Bayes (**NB**) classifier.
 
 We split the data, so that **20%** of them remain for testing.
 
@@ -81,7 +81,7 @@ avg / total       0.94      0.94      0.94      1196
 
 #### Experiment 3: TFIDF - NB - 20% test
 
-In this experiment we use a **TFIDF** representation of each documet. And also a Naive Bayes (**NB**) classifier.
+In this experiment we use a **TFIDF** representation of each document. And also a Naive Bayes (**NB**) classifier.
 
 We split the data, so that **20%** of them remain for testing.
 
@@ -99,7 +99,7 @@ avg / total       0.95      0.95      0.95      1196
 
 #### Experiment 4: TFIDF - SVM - 20% test
 
-In this experiment we use a **TFIDF** representation of each documet. And also a linear Support Vector Machine (**SVM**) classifier.
+In this experiment we use a **TFIDF** representation of each document. And also a linear Support Vector Machine (**SVM**) classifier.
 
 We split the data, so that **20%** of them remain for testing.
 
@@ -117,7 +117,7 @@ avg / total       0.97      0.97      0.97      1196
 
 #### Experiment 5: TFIDF - SVM - KFOLD
 
-In this experiment we use a **TFIDF** representation of each documet. And also a linear Support Vector Machine (**SVM**) classifier.
+In this experiment we use a **TFIDF** representation of each document. And also a linear Support Vector Machine (**SVM**) classifier.
 
 We split the data using Stratified **K-Fold** algorithm with **k = 5**.
 
@@ -130,7 +130,7 @@ Mean accuracy: 0.977 (+/- 0.002 std)
 
 #### Experiment 5: BOW - NB - KFOLD
 
-In this experiment we use a **TFIDF** representation of each documet. And also a linear Support Vector Machine (**SVM**) classifier.
+In this experiment we use a **TFIDF** representation of each document. And also a linear Support Vector Machine (**SVM**) classifier.
 
 We split the data using Stratified **K-Fold** algorithm with **k = 5**.
 
@@ -142,7 +142,7 @@ Mean accuracy: 0.968 (+/- 0.002 std)
 
 #### Experiment 6: TFIDF - SVM - 90% test
 
-In this experiment we use a **TFIDF** representation of each documet. And also a linear Support Vector Machine (**SVM**) classifier.
+In this experiment we use a **TFIDF** representation of each document. And also a linear Support Vector Machine (**SVM**) classifier.
 
 We split the data, so that **90%** of them remain for testing! Only 10% of the dataset is used for training!
 
@@ -160,7 +160,7 @@ avg / total       0.92      0.92      0.92      5382
 
 #### Experiment 7: TFIDF - SVM - KFOLD - 20 classes
 
-In this experiment we use a **TFIDF** representation of each documet. And also a linear Support Vector Machine (**SVM**) classifier.
+In this experiment we use a **TFIDF** representation of each document. And also a linear Support Vector Machine (**SVM**) classifier.
 
 We split the data using Stratified **K-Fold** algorithm with **k = 5**.
 
