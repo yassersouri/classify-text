@@ -1,11 +1,12 @@
-from colorama import init
-from termcolor import colored
+
 import sklearn.datasets
 import sklearn.feature_extraction.text
 import sklearn.naive_bayes
 import sklearn.cross_validation
 import sklearn.svm
 def main():
+	from colorama import init
+	from termcolor import colored
 	init()
 
 	test_main()
