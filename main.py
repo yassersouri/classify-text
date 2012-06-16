@@ -13,7 +13,7 @@ def main():
 
 	# exit();
 	# Load All the files
-	files = sklearn.datasets.load_files('ds3', shuffle=True)
+	# files = sklearn.datasets.load_files('ds3', shuffle=True)
 	
 	# BagofWords
 	count_vector = sklearn.feature_extraction.text.CountVectorizer()
@@ -21,7 +21,7 @@ def main():
 	
 	# find incompatible files
 	incom_files = find_incompatible_files('ds3')
-	print incom_files
+	delete_incompatible_files(incom_files)
 	exit()
 
 	# calculate BOW
@@ -69,6 +69,12 @@ def test_main():
 	scores = cross_validation(X, files.target, clf, cv=10)
 	pretty_print_scores(scores)
 
+
+def delete_incompatible_files(files):
+	import os
+	for f in files:
+		print colored("deleting file:", 'red'), f
+		os.remove(f)
 
 def find_incompatible_files(path):
 	"""
