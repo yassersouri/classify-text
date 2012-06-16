@@ -8,16 +8,14 @@ import sklearn.svm
 def main():
 	init()
 
-
 	test_main()
-
-	exit();
+	exit()
+	
 	# Load All the files
 	# files = sklearn.datasets.load_files('ds3', shuffle=True)
 	
 	# BagofWords
 	count_vector = sklearn.feature_extraction.text.CountVectorizer()
-	
 	
 	# find incompatible files
 	incom_files = find_incompatible_files('ds3')
@@ -58,7 +56,7 @@ def test_main():
 	word_counts = bagOfWords(files.data)
 
 	# TFIDF
-	tf_transformer = sklearn.feature_extraction.text.TfidfTransformer(use_idf=True).fit(word_counts)
+	tf_transformer = sklearn.feature_extraction.text.TfidfTransformer(use_idf=False).fit(word_counts)
 	X_tfidf = tf_transformer.transform(word_counts)
 
 
@@ -70,8 +68,11 @@ def test_main():
 	scores = cross_validation(X, files.target, clf, cv=10)
 	pretty_print_scores(scores)
 
-
 def delete_incompatible_files(files):
+	"""
+	Deletes the list of files that are passed to it from file system!
+	argument `files` is a list of strings. containing absolute or relative pathes
+	"""
 	import os
 	for f in files:
 		print colored("deleting file:", 'red'), f
