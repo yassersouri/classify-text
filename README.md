@@ -10,7 +10,7 @@ For dataset I used the famous "Twenty Newsgrousps" dataset. You can find the dat
 
 I've included a subset of the dataset in the repo, located at `dataset\` directory. This subset includes 6 of the 20 newsgroups: `space`, `electronics`, `crypt`, `hockey`, `motorcycles` and `forsale`.
 
-When you run `main.py` it asks you for the root of the dataset. You can supply your own dataset assuming it has a similar directry structure.
+When you run `main.py` it asks you for the root of the dataset. You can supply your own dataset assuming it has a similar directory structure.
 
 #### UTF-8 incompatibility
 
@@ -41,7 +41,7 @@ The code is pretty straight forward and well documented.
 
 For experiments I used the subset of the dataset (as described above). I assume that we like `hockey`, `crypt` and `electronics` newsgroups, and we dislike the others.
 
-For each experiment we use a "feature vector", a "classifier" and a train-test spliting strategy.
+For each experiment we use a "feature vector", a "classifier" and a train-test splitting strategy.
 
 #### Experiment 1: BOW - NB - 20% test
 
@@ -58,7 +58,6 @@ __Results__:
       likes       0.99      0.95      0.97       621
 
 avg / total       0.97      0.97      0.97      1196
-
 ```
 
 #### Experiment 2: TF - NB - 20% test
@@ -76,7 +75,6 @@ __Results__:
       likes       0.91      0.97      0.94       563
 
 avg / total       0.94      0.94      0.94      1196
-
 ```
 
 #### Experiment 3: TFIDF - NB - 20% test
@@ -94,7 +92,6 @@ __Results__:
       likes       0.95      0.96      0.96       612
 
 avg / total       0.95      0.95      0.95      1196
-
 ```
 
 #### Experiment 4: TFIDF - SVM - 20% test
@@ -112,7 +109,6 @@ __Results__:
       likes       0.97      0.96      0.97       609
 
 avg / total       0.97      0.97      0.97      1196
-
 ```
 
 #### Experiment 5: TFIDF - SVM - KFOLD
@@ -125,7 +121,6 @@ __Results__:
 
 ```
 Mean accuracy: 0.977 (+/- 0.002 std)
-
 ```
 
 #### Experiment 5: BOW - NB - KFOLD
@@ -155,7 +150,6 @@ __Results__:
       likes       0.95      0.90      0.92      2693
 
 avg / total       0.92      0.92      0.92      5382
-
 ```
 
 #### Experiment 7: TFIDF - SVM - KFOLD - 20 classes
@@ -170,10 +164,30 @@ __Results__:
 
 ```
 Mean accuracy: 0.892 (+/- 0.001 std)
-
 ```
 
+#### Experiment 7: BOW - NB - KFOLD - 20 classes
+
+In this experiment we use a Bag Of Words (**BOW**) representation of each document. And also a Naive Bayes (**NB**) classifier.
+
+We split the data using Stratified **K-Fold** algorithm with **k = 5**.
+
+We also use the whole "Twenty Newsgroups" dataset, which has **20** classes.
+
+__Results__:
+
+```
+Mean accuracy: 0.839 (+/- 0.003 std)
+```
 
 ### So What?
 
 This experiments show that text classification can be effectively done by simple tools like TFIDF and SVM.
+
+#### Any Conclusion?
+
+We have found that TFIDF with SVM have the best performance.
+
+TFIDF with SVM perform well both for 2-class problem and 20-class problem.
+
+I would say if you want suggestion from me, use **TFIDF with SVM**.
