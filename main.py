@@ -6,11 +6,66 @@ import sklearn.svm
 import sklearn.naive_bayes
 from colorama import init
 from termcolor import colored
+import sys
+import os
+import glob
+
 def main():
-	# initial color printing
 	init()
 
-	dir_path = 'dataset'
+	# get the dataset 
+	print colored("Where is the dataset?", 'cyan', attrs=['bold'])
+	print colored('warning: files might get deleted if they are incompatible with utf8', 'yellow')
+	ans = sys.stdin.readline()
+	# remove any newlines or spaces at the end of the input
+	path = ans.strip('\n')
+	if path.endswith(' '):
+		path = path.rstrip(' ')
+
+	# preprocess data into two folders instead of 6
+	print colored("Reorganizing folders, into two classes", 'cyan', attrs=['bold'])
+	reorganize_dataset(path)
+
+
+	print '\n\n'
+
+	# do the main test
+	main_test(path)
+
+def reorganize_dataset(path):
+	likes = ['rec.sport.hockey', 'sci.crypt', 'sci.electronics']
+	dislikes = ['sci.space', 'rec.motorcycles', 'misc.forsale']
+
+	folders = glob.glob(path + '/*')
+	if len(folders) == 2:
+		return
+	else:
+		# create `likes` and `dislikes` directories
+		if not os.path.exists(path + '/' + 'likes'):
+			os.makedirs(path + '/' + 'likes')
+		if not os.path.exists(path + '/' + 'dislikes'):
+			os.makedirs(path + '/' + 'dislikes')
+
+		for like in likes:
+			files = glob.glob(path + '/' + like + '/*')
+			for f in files:
+				parts = f.split('/')
+				name = parts[len(parts) -1]
+				newname = like + '_' + name
+				os.rename(f, path+'/likes/'+newname)
+			os.rmdir(path + '/' + like)
+		
+		for like in dislikes:
+			files = glob.glob(path + '/' + like + '/*')
+			for f in files:
+				parts = f.split('/')
+				name = parts[len(parts) -1]
+				newname = like + '_' + name
+				os.rename(f, path+'/dislikes/'+newname)
+			os.rmdir(path + '/' + like)
+
+def main_test(path = None):
+	dir_path = path or 'dataset'
 
 	# find incompatible files
 	print colored('Finding files incompatible with utf8: ', 'green', attrs=['bold'])
@@ -21,6 +76,8 @@ def main():
 	if(len(incompatible_files) > 0):
 		print colored('Deleting incompatible files', 'red', attrs=['bold'])
 		util.delete_incompatible_files(incompatible_files)
+
+	print '\n\n'
 
 	# load data
 	print colored('Loading files into memory', 'green', attrs=['bold'])
@@ -39,13 +96,15 @@ def main():
 	tf_transformer = sklearn.feature_extraction.text.TfidfTransformer(use_idf=False).fit(word_counts)
 	X = tf_transformer.transform(word_counts)
 
+	print '\n\n'
+
 	# create classifier
 	clf = sklearn.svm.LinearSVC()
 
 	# test the classifier
 	print '\n\n'
 	print colored('Testing classifier with train-test split', 'blue', attrs=['bold'])
-	test_classifier(X, files.target, clf, test_size=0.2, y_names=files.target_names, confusion=True)
+	test_classifier(X, files.target, clf, test_size=0.2, y_names=files.target_names, confusion=False)
 
 def test_classifier(X, y, clf, test_size=0.4, y_names=None, confusion=False):
 	#train-test split
