@@ -9,9 +9,9 @@ def main():
 	init()
 
 
-	# test_main()
+	test_main()
 
-	# exit();
+	exit();
 	# Load All the files
 	# files = sklearn.datasets.load_files('ds3', shuffle=True)
 	
@@ -47,6 +47,7 @@ def main():
 def test_main():
 	directory = 'ds2'
 	directory = 'dataset'
+	directory = 'ds3'
 	# load the dataset from disk
 	files = sklearn.datasets.load_files(directory)
 
@@ -64,7 +65,7 @@ def test_main():
 	X = X_tfidf
 
 	#cross validation
-	clf = sklearn.naive_bayes.MultinomialNB()
+	# clf = sklearn.naive_bayes.MultinomialNB()
 	clf = sklearn.svm.LinearSVC()
 	scores = cross_validation(X, files.target, clf, cv=10)
 	pretty_print_scores(scores)
