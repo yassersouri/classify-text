@@ -4,6 +4,7 @@ import sklearn.metrics
 import sklearn.cross_validation
 import sklearn.svm
 import sklearn.naive_bayes
+import sklearn.neighbors
 from colorama import init
 from termcolor import colored
 import sys
@@ -101,7 +102,11 @@ def main_test(path = None):
 
 	# create classifier
 	# clf = sklearn.naive_bayes.MultinomialNB()
-	clf = sklearn.svm.LinearSVC()
+	# clf = sklearn.svm.LinearSVC()
+	n_neighbors = 11
+	weights = 'uniform'
+	weights = 'distance'
+	clf = sklearn.neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
 
 	# test the classifier
 	print '\n\n'
