@@ -5,43 +5,14 @@ import sklearn.feature_extraction.text
 import sklearn.naive_bayes
 import sklearn.cross_validation
 import sklearn.svm
+import sklearn.neighbors
 def main():
 	from colorama import init
 	from termcolor import colored
 	init()
 
 	test_main()
-	exit()
 	
-	# Load All the files
-	# files = sklearn.datasets.load_files('ds3', shuffle=True)
-	
-	# BagofWords
-	count_vector = sklearn.feature_extraction.text.CountVectorizer()
-	
-	# find incompatible files
-	incom_files = find_incompatible_files('ds3')
-	delete_incompatible_files(incom_files)
-	exit()
-
-	# calculate BOW
-	X_counts = count_vector.fit_transform(files.data)
-	
-	# calculate TFIDF
-	tf_transformer = sklearn.feature_extraction.text.TfidfTransformer(use_idf=True).fit(X_counts)
-	X_tf = tf_transformer.transform(X_counts)
-	
-	# fit classifier
-	clf = sklearn.naive_bayes.MultinomialNB().fit(X_tf, files.target)
-
-	docs_new = ['I want to sell this low price stuff', 'Playing with new skates and stick']
-	X_new_counts = count_vector.transform(docs_new)
-	X_new_tf = tf_transformer.transform(X_new_counts)
-
-	predicted = clf.predict(X_new_tf)
-
-	for doc, cat in zip(docs_new, predicted):
-		print '%r => %s' % (doc, files.target_names[cat])
 
 
 def test_main():
@@ -58,7 +29,7 @@ def test_main():
 	word_counts = bagOfWords(files.data)
 
 	# TFIDF
-	tf_transformer = sklearn.feature_extraction.text.TfidfTransformer(use_idf=False).fit(word_counts)
+	tf_transformer = sklearn.feature_extraction.text.TfidfTransformer(use_idf=True).fit(word_counts)
 	X_tfidf = tf_transformer.transform(word_counts)
 
 
@@ -66,8 +37,12 @@ def test_main():
 
 	#cross validation
 	# clf = sklearn.naive_bayes.MultinomialNB()
-	clf = sklearn.svm.LinearSVC()
-	scores = cross_validation(X, files.target, clf, cv=10)
+	# clf = sklearn.svm.LinearSVC()
+	n_neighbors = 5
+	weights = 'uniform'
+	# weights = 'distance'
+	clf = sklearn.neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
+	scores = cross_validation(X, files.target, clf, cv=5)
 	pretty_print_scores(scores)
 
 def delete_incompatible_files(files):

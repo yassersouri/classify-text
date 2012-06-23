@@ -180,6 +180,66 @@ __Results__:
 Mean accuracy: 0.839 (+/- 0.003 std)
 ```
 
+#### Experiment 8: TFIDF - 5-NN - Distance Weights - 20% test
+
+In this experiment we use a **TFIDF** representation of each document. And also a K Nearest Neighbors (**KNN**) classifier with **k = 5** and **distance weights**.
+
+We split the data using Stratified **K-Fold** algorithm with **k = 5**.
+
+__Results__:
+
+```
+             precision    recall  f1-score   support
+
+   dislikes       0.93      0.88      0.90       608
+      likes       0.88      0.93      0.90       588
+
+avg / total       0.90      0.90      0.90      1196
+```
+
+#### Experiment 9: TFIDF - 5-NN - Uniform Weights - 20% test
+
+In this experiment we use a **TFIDF** representation of each document. And also a K Nearest Neighbors (**KNN**) classifier with **k = 5** and **uniform weights**.
+
+We split the data using Stratified **K-Fold** algorithm with **k = 5**.
+
+__Results__:
+
+```
+             precision    recall  f1-score   support
+
+   dislikes       0.95      0.90      0.92       581
+      likes       0.91      0.95      0.93       615
+
+avg / total       0.93      0.93      0.93      1196
+```
+
+#### Experiment 10: TFIDF - 5-NN - Distance Weights - KFOLD
+
+In this experiment we use a **TFIDF** representation of each document. And also a K Nearest Neighbors (**KNN**) classifier with **k = 5** and **distance weights**.
+
+We split the data using Stratified **K-Fold** algorithm with **k = 5**.
+
+__Results__:
+
+```
+Mean accuracy: 0.908 (+/- 0.003 std)
+```
+
+#### Experiment 11: TFIDF - 5-NN - Distance Weights - KFOLD - 20 classes
+
+In this experiment we use a **TFIDF** representation of each document. And also a K Nearest Neighbors (**KNN**) classifier with **k = 5** and **distance weights**.
+
+We split the data using Stratified **K-Fold** algorithm with **k = 5**.
+
+We also use the whole "Twenty Newsgroups" dataset, which has **20** classes.
+
+__Results__:
+
+```
+ Mean accuracy: 0.745 (+/- 0.002 std) 
+```
+
 ### So What?
 
 This experiments show that text classification can be effectively done by simple tools like TFIDF and SVM.
