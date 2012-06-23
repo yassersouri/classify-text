@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Classify-text by yassersouri</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Classify-text</h1>
+          <h2>&quot;20 Newsgroups&quot; text classification with python</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/yassersouri/classify-text/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/yassersouri/classify-text/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/yassersouri/classify-text" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <p></p>Salam
+
+<h2>Text Classification with python</h2>
+
+<p>This is an experiment. We want to classify text with python.</p>
+
+<h3>Dataset</h3>
+
+<p>For dataset I used the famous "Twenty Newsgrousps" dataset. You can find the dataset freely <a href="http://archive.ics.uci.edu/ml/datasets/Twenty+Newsgroups">here</a>. </p>
+
+<p>I've included a subset of the dataset in the repo, located at <code>dataset\</code> directory. This subset includes 6 of the 20 newsgroups: <code>space</code>, <code>electronics</code>, <code>crypt</code>, <code>hockey</code>, <code>motorcycles</code> and <code>forsale</code>.</p>
+
+<p>When you run <code>main.py</code> it asks you for the root of the dataset. You can supply your own dataset assuming it has a similar directory structure.</p>
+
+<h4>UTF-8 incompatibility</h4>
+
+<p>Some of the supplied text files had incompatibility with utf-8!</p>
+
+<p>Even textedit.app can't open those files. And they created problem in the code. So I'll delete them as part of the preprocessing.</p>
+
+<h3>Requirements</h3>
+
+<ul>
+<li><p>python 2.7</p></li>
+<li>
+<p>python modules:</p>
+
+<ul>
+<li>scikit-learn (v 0.11)</li>
+<li>scipy (v 0.10.1)</li>
+<li>colorama</li>
+<li>termcolor</li>
+</ul>
+</li>
+</ul><h3>The code</h3>
+
+<p>The code is pretty straight forward and well documented.</p>
+
+<h4>Running the code</h4>
+
+<pre><code>python main.py
+</code></pre>
+
+<h3>Experiments</h3>
+
+<p>For experiments I used the subset of the dataset (as described above). I assume that we like <code>hockey</code>, <code>crypt</code> and <code>electronics</code> newsgroups, and we dislike the others.</p>
+
+<p>For each experiment we use a "feature vector", a "classifier" and a train-test splitting strategy.</p>
+
+<h4>Experiment 1: BOW - NB - 20% test</h4>
+
+<p>In this experiment we use a Bag Of Words (<strong>BOW</strong>) representation of each document. And also a Naive Bayes (<strong>NB</strong>) classifier.</p>
+
+<p>We split the data, so that <strong>20%</strong> of them remain for testing.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>             precision    recall  f1-score   support
+
+   dislikes       0.95      0.99      0.97       575
+      likes       0.99      0.95      0.97       621
+
+avg / total       0.97      0.97      0.97      1196
+</code></pre>
+
+<h4>Experiment 2: TF - NB - 20% test</h4>
+
+<p>In this experiment we use a Term Frequency (<strong>TF</strong>) representation of each document. And also a Naive Bayes (<strong>NB</strong>) classifier.</p>
+
+<p>We split the data, so that <strong>20%</strong> of them remain for testing.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>             precision    recall  f1-score   support
+
+   dislikes       0.97      0.92      0.94       633
+      likes       0.91      0.97      0.94       563
+
+avg / total       0.94      0.94      0.94      1196
+</code></pre>
+
+<h4>Experiment 3: TFIDF - NB - 20% test</h4>
+
+<p>In this experiment we use a <strong>TFIDF</strong> representation of each document. And also a Naive Bayes (<strong>NB</strong>) classifier.</p>
+
+<p>We split the data, so that <strong>20%</strong> of them remain for testing.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>             precision    recall  f1-score   support
+
+   dislikes       0.96      0.95      0.95       584
+      likes       0.95      0.96      0.96       612
+
+avg / total       0.95      0.95      0.95      1196
+</code></pre>
+
+<h4>Experiment 4: TFIDF - SVM - 20% test</h4>
+
+<p>In this experiment we use a <strong>TFIDF</strong> representation of each document. And also a linear Support Vector Machine (<strong>SVM</strong>) classifier.</p>
+
+<p>We split the data, so that <strong>20%</strong> of them remain for testing.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>             precision    recall  f1-score   support
+
+   dislikes       0.96      0.97      0.97       587
+      likes       0.97      0.96      0.97       609
+
+avg / total       0.97      0.97      0.97      1196
+</code></pre>
+
+<h4>Experiment 5: TFIDF - SVM - KFOLD</h4>
+
+<p>In this experiment we use a <strong>TFIDF</strong> representation of each document. And also a linear Support Vector Machine (<strong>SVM</strong>) classifier.</p>
+
+<p>We split the data using Stratified <strong>K-Fold</strong> algorithm with <strong>k = 5</strong>.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>Mean accuracy: 0.977 (+/- 0.002 std)
+</code></pre>
+
+<h4>Experiment 5: BOW - NB - KFOLD</h4>
+
+<p>In this experiment we use a <strong>TFIDF</strong> representation of each document. And also a linear Support Vector Machine (<strong>SVM</strong>) classifier.</p>
+
+<p>We split the data using Stratified <strong>K-Fold</strong> algorithm with <strong>k = 5</strong>.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>Mean accuracy: 0.968 (+/- 0.002 std)
+</code></pre>
+
+<h4>Experiment 6: TFIDF - SVM - 90% test</h4>
+
+<p>In this experiment we use a <strong>TFIDF</strong> representation of each document. And also a linear Support Vector Machine (<strong>SVM</strong>) classifier.</p>
+
+<p>We split the data, so that <strong>90%</strong> of them remain for testing! Only 10% of the dataset is used for training!</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>             precision    recall  f1-score   support
+
+   dislikes       0.90      0.95      0.93      2689
+      likes       0.95      0.90      0.92      2693
+
+avg / total       0.92      0.92      0.92      5382
+</code></pre>
+
+<h4>Experiment 7: TFIDF - SVM - KFOLD - 20 classes</h4>
+
+<p>In this experiment we use a <strong>TFIDF</strong> representation of each document. And also a linear Support Vector Machine (<strong>SVM</strong>) classifier.</p>
+
+<p>We split the data using Stratified <strong>K-Fold</strong> algorithm with <strong>k = 5</strong>.</p>
+
+<p>We also use the whole "Twenty Newsgroups" dataset, which has <strong>20</strong> classes.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>Mean accuracy: 0.892 (+/- 0.001 std)
+</code></pre>
+
+<h4>Experiment 7: BOW - NB - KFOLD - 20 classes</h4>
+
+<p>In this experiment we use a Bag Of Words (<strong>BOW</strong>) representation of each document. And also a Naive Bayes (<strong>NB</strong>) classifier.</p>
+
+<p>We split the data using Stratified <strong>K-Fold</strong> algorithm with <strong>k = 5</strong>.</p>
+
+<p>We also use the whole "Twenty Newsgroups" dataset, which has <strong>20</strong> classes.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>Mean accuracy: 0.839 (+/- 0.003 std)
+</code></pre>
+
+<h4>Experiment 8: TFIDF - 5-NN - Distance Weights - 20% test</h4>
+
+<p>In this experiment we use a <strong>TFIDF</strong> representation of each document. And also a K Nearest Neighbors (<strong>KNN</strong>) classifier with <strong>k = 5</strong> and <strong>distance weights</strong>.</p>
+
+<p>We split the data using Stratified <strong>K-Fold</strong> algorithm with <strong>k = 5</strong>.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>             precision    recall  f1-score   support
+
+   dislikes       0.93      0.88      0.90       608
+      likes       0.88      0.93      0.90       588
+
+avg / total       0.90      0.90      0.90      1196
+</code></pre>
+
+<h4>Experiment 9: TFIDF - 5-NN - Uniform Weights - 20% test</h4>
+
+<p>In this experiment we use a <strong>TFIDF</strong> representation of each document. And also a K Nearest Neighbors (<strong>KNN</strong>) classifier with <strong>k = 5</strong> and <strong>uniform weights</strong>.</p>
+
+<p>We split the data using Stratified <strong>K-Fold</strong> algorithm with <strong>k = 5</strong>.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>             precision    recall  f1-score   support
+
+   dislikes       0.95      0.90      0.92       581
+      likes       0.91      0.95      0.93       615
+
+avg / total       0.93      0.93      0.93      1196
+</code></pre>
+
+<h4>Experiment 10: TFIDF - 5-NN - Distance Weights - KFOLD</h4>
+
+<p>In this experiment we use a <strong>TFIDF</strong> representation of each document. And also a K Nearest Neighbors (<strong>KNN</strong>) classifier with <strong>k = 5</strong> and <strong>distance weights</strong>.</p>
+
+<p>We split the data using Stratified <strong>K-Fold</strong> algorithm with <strong>k = 5</strong>.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code>Mean accuracy: 0.908 (+/- 0.003 std)
+</code></pre>
+
+<h4>Experiment 11: TFIDF - 5-NN - Distance Weights - KFOLD - 20 classes</h4>
+
+<p>In this experiment we use a <strong>TFIDF</strong> representation of each document. And also a K Nearest Neighbors (<strong>KNN</strong>) classifier with <strong>k = 5</strong> and <strong>distance weights</strong>.</p>
+
+<p>We split the data using Stratified <strong>K-Fold</strong> algorithm with <strong>k = 5</strong>.</p>
+
+<p>We also use the whole "Twenty Newsgroups" dataset, which has <strong>20</strong> classes.</p>
+
+<p><strong>Results</strong>:</p>
+
+<pre><code> Mean accuracy: 0.745 (+/- 0.002 std) 
+</code></pre>
+
+<h3>So What?</h3>
+
+<p>This experiments show that text classification can be effectively done by simple tools like TFIDF and SVM.</p>
+
+<h4>Any Conclusion?</h4>
+
+<p>We have found that TFIDF with SVM have the best performance.</p>
+
+<p>TFIDF with SVM perform well both for 2-class problem and 20-class problem.</p>
+
+<p>I would say if you want suggestion from me, use <strong>TFIDF with SVM</strong>.</p>
+        </section>
+
+        <footer>
+          Classify-text is maintained by <a href="https://github.com/yassersouri">yassersouri</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
