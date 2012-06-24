@@ -68,15 +68,7 @@ def reorganize_dataset(path):
 def main_test(path = None):
 	dir_path = path or 'dataset'
 
-	# find incompatible files
-	print colored('Finding files incompatible with utf8: ', 'green', attrs=['bold'])
-	incompatible_files = util.find_incompatible_files(dir_path)
-	print colored(len(incompatible_files), 'yellow'), 'files found'
-
-	# delete them
-	if(len(incompatible_files) > 0):
-		print colored('Deleting incompatible files', 'red', attrs=['bold'])
-		util.delete_incompatible_files(incompatible_files)
+	remove_incompatible_files(dir_path)
 
 	print '\n\n'
 
@@ -112,6 +104,17 @@ def main_test(path = None):
 	print '\n\n'
 	print colored('Testing classifier with train-test split', 'magenta', attrs=['bold'])
 	test_classifier(X, files.target, clf, test_size=0.2, y_names=files.target_names, confusion=False)
+
+def remove_incompatible_files(dir_path):
+	# find incompatible files
+	print colored('Finding files incompatible with utf8: ', 'green', attrs=['bold'])
+	incompatible_files = util.find_incompatible_files(dir_path)
+	print colored(len(incompatible_files), 'yellow'), 'files found'
+
+	# delete them
+	if(len(incompatible_files) > 0):
+		print colored('Deleting incompatible files', 'red', attrs=['bold'])
+		util.delete_incompatible_files(incompatible_files)
 
 def test_classifier(X, y, clf, test_size=0.4, y_names=None, confusion=False):
 	#train-test split
