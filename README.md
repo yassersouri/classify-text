@@ -24,10 +24,11 @@ Even textedit.app can't open those files. And they created problem in the code. 
 
 * python modules:
 
-  - scikit-learn (v 0.11)
-  - scipy (v 0.10.1)
-  - colorama
-  - termcolor
+  * scikit-learn (v 0.11)
+  * scipy (v 0.10.1)
+  * colorama
+  * termcolor
+  * matplotlib (for use in `plot.py`)
 
 ### The code
 
