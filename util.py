@@ -67,8 +67,8 @@ def find_incompatible_files(path):
 	num = []
 	for i in range(len(files.filenames)):
 		try:
-			X_counts = count_vector.fit_transform(files.data[i:i+1])
-		except Exception, e:
+			count_vector.fit_transform(files.data[i:i+1])
+		except UnicodeDecodeError:
 			num.append(files.filenames[i])
 
 	return num
