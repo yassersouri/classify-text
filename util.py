@@ -70,6 +70,8 @@ def find_incompatible_files(path):
 			count_vector.fit_transform(files.data[i:i+1])
 		except UnicodeDecodeError:
 			num.append(files.filenames[i])
+		except ValueError:
+			pass
 
 	return num
 
