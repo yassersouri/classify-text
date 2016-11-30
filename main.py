@@ -38,33 +38,33 @@ def reorganize_dataset(path):
     likes = ['rec.sport.hockey', 'sci.crypt', 'sci.electronics']
     dislikes = ['sci.space', 'rec.motorcycles', 'misc.forsale']
 
-    folders = glob.glob(path + '/*')
+    folders = glob.glob(os.path.join(path, '*'))
     if len(folders) == 2:
         return
     else:
         # create `likes` and `dislikes` directories
-        if not os.path.exists(path + '/' + 'likes'):
-            os.makedirs(path + '/' + 'likes')
-        if not os.path.exists(path + '/' + 'dislikes'):
-            os.makedirs(path + '/' + 'dislikes')
+        if not os.path.exists(os.path.join(path, 'likes')):
+            os.makedirs(os.path.join(path, 'likes'))
+        if not os.path.exists(os.path.join(path, 'dislikes')):
+            os.makedirs(os.path.join(path, 'dislikes'))
 
         for like in likes:
-            files = glob.glob(path + '/' + like + '/*')
+            files = glob.glob(os.path.join(path, like, '*'))
             for f in files:
-                parts = f.split('/')
+                parts = f.split(os.sep)
                 name = parts[len(parts) - 1]
                 newname = like + '_' + name
-                os.rename(f, path + '/likes/' + newname)
-            os.rmdir(path + '/' + like)
+                os.rename(f, os.path.join(path, 'likes', newname))
+            os.rmdir(os.path.join(path, like))
 
         for like in dislikes:
-            files = glob.glob(path + '/' + like + '/*')
+            files = glob.glob(os.path.join(path, like, '*'))
             for f in files:
-                parts = f.split('/')
+                parts = f.split(os.sep)
                 name = parts[len(parts) - 1]
                 newname = like + '_' + name
-                os.rename(f, path + '/dislikes/' + newname)
-            os.rmdir(path + '/' + like)
+                os.rename(f, os.path.join(path, 'dislikes', newname))
+            os.rmdir(os.path.join(path, like))
 
 
 def main_test(path=None):
